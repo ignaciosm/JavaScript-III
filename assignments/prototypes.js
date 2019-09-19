@@ -40,37 +40,74 @@
   * Instances of CharacterStats should have all of the same properties as GameObject.
 */
 
-// Ignacio's functions
+// Ignacio's Prototype Functions
 
-function GameObject(attributes){
-  this.createdAt = attributes.createdAt,
-  this.name = attributes.name,
-  this.dimensions = attributes.dimensions
+// function GameObject(attributes){
+//   this.createdAt = attributes.createdAt,
+//   this.name = attributes.name,
+//   this.dimensions = attributes.dimensions
+// }
+
+// function CharacterStats(attributes){
+//   GameObject.call(this, attributes),
+//   this.healthPoints = attributes.healthPoints
+// }
+
+// function Humanoid(attributes){
+//   CharacterStats.call(this, attributes),
+//   this.team = attributes.team,
+//   this.weapons = attributes.weapons,
+//   this.language = attributes.language
+// };
+
+// Ignacio's Class Functions
+class GameObject{
+  constructor(attributes){
+    this.createdAt = attributes.createdAt,
+    this.name = attributes.name,
+    this.dimensions = attributes.dimensions
+  }
+  destroy(){
+    return `${this.name} was removed from the game.`;
+  }
 }
 
-function CharacterStats(attributes){
-  GameObject.call(this, attributes),
-  this.healthPoints = attributes.healthPoints
+class CharacterStats extends GameObject{
+  constructor(attributes){
+    super(attributes);
+    this.healthPoints = attributes.healthPoints
+  }
+  takeDamage(){
+    return `${this.name} took damage.`;
+  }
 }
 
-function Humanoid(attributes){
-  CharacterStats.call(this, attributes),
-  this.team = attributes.team,
-  this.weapons = attributes.weapons,
-  this.language = attributes.language
-};
-
-Humanoid.prototype.destroy = function() {
-  return `${this.name} was removed from the game.`;
+class Humanoid extends CharacterStats{
+  constructor(attributes){
+    super(attributes);
+    this.team = attributes.team,
+    this.weapons = attributes.weapons,
+    this.language = attributes.language
+  }
+  greet(){
+    return `${this.name}  offers a greeting in ${this.language}`;
+  }
 }
 
-Humanoid.prototype.greet = function(){
-  return `${this.name}  offers a greeting in ${this.language}`;
-}
 
-Humanoid.prototype.takeDamage = function(){
-  return `${this.name} took damage.`;
-}
+// Humanoid.prototype.destroy = function() {
+//   return `${this.name} was removed from the game.`;
+// }
+
+// Humanoid.prototype.takeDamage = function(){
+//   return `${this.name} took damage.`;
+// }
+
+// Humanoid.prototype.greet = function(){
+//   return `${this.name}  offers a greeting in ${this.language}`;
+// }
+
+
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
